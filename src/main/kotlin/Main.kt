@@ -9,14 +9,19 @@ fun main(args: Array<String>) {
         215.0, 250.5,
         180.5, 240.0
     )
+    val pizzaKiev = PizzaKiev(
+        200.0, 250.0,
+        180.0, 240.5
+    )
 
     while (true) {
         println("Добрый день! Выберите город")
-        println("1. Москва\n2. Санкт-Петербург\n\n0. Выход из программы")
+        println("1. Москва\n2. Санкт-Петербург\n3. Киев\n\n0. Выход из программы")
 
         val currentPizzaCity = when (readln()) {
             "1" -> pizzaMoscow
             "2" -> pizzaPeter
+            "3" -> pizzaKiev
             "0" -> break
             else -> {
                 println("Ошибка")
@@ -33,24 +38,20 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
     when (readln()) {
         "1" -> {
             currentPizzaCity.neapolitanPizzaSale()
-            selectAddSevice(currentPizzaCity)
+            selectAddService(currentPizzaCity, "neapolitan")
         }
-
         "2" -> {
             currentPizzaCity.romanPizzaSale()
-            selectAddSevice(currentPizzaCity)
+            selectAddService(currentPizzaCity, "roman")
         }
-
         "3" -> {
             currentPizzaCity.sicilianPizzaSale()
-            selectAddSevice(currentPizzaCity)
+            selectAddService(currentPizzaCity, "sicilian")
         }
-
         "4" -> {
             currentPizzaCity.tyroleanPizzaSale()
-            selectAddSevice(currentPizzaCity)
+            selectAddService(currentPizzaCity, "tyrolean")
         }
-
         "0" -> currentPizzaCity.showStatistics()
         else -> {
             println("Ошибка")
@@ -59,9 +60,14 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
     }
 }
 
-fun selectAddSevice(currentPizzaCity: PizzaCity) {
+fun selectAddService(currentPizzaCity: PizzaCity, pizzaName: String) {
     when (currentPizzaCity){
-        is CheckPhoto -> currentPizzaCity.showCheckPhoto()
-        is Drink -> currentPizzaCity.drinkSale()
+        is PizzaKiev -> {
+            currentPizzaCity.showCheckPhoto()
+            currentPizzaCity.drinkSale(pizzaName)
+            currentPizzaCity.sauceSale()
+        }
+        is PizzaMoscow -> currentPizzaCity.showCheckPhoto()
+        is PizzaPeter -> currentPizzaCity.drinkSale(pizzaName)
     }
 }

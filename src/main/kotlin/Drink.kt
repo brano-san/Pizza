@@ -1,7 +1,5 @@
 interface Drink {
-    abstract var yesCount: Int
-    abstract var noCount: Int
-    abstract var cofeCount: Int
     abstract var summaryCofeMoney: Int
-    fun drinkSale()
+    abstract var pizzas: MutableMap<String, Int>
+    abstract fun drinkSale(pizzaName: String)
 }

@@ -6,21 +6,15 @@ class PizzaMoscow(
 ) : PizzaCity(neapolitanPizzaPrice, romanPizzaPrice,
     sicilianPizzaPrice, tyroleanPizzaPrice
 ), CheckPhoto{
-    override var yesCount = 0
-    override var noCount = 0
-    override var checkCount = 0
+    override var yesPhoto = 0
     override var summarySale = 0
 
     override fun showCheckPhoto() {
-        println("У вас есть фотография чека?")
+        println("\nУ вас есть фотография чека?")
         println("1. Да\n2. Нет")
         if (readln() == "1"){
-            println("Вам будет скидка 50 рублей с покупки")
-            checkCount++
+            println("Вам будет скидка 50 рублей с покупки\n")
             summarySale += 50
-            yesCount++
-        } else {
-            noCount++
         }
     }
     override fun neapolitanPizzaSale(){
@@ -45,6 +39,8 @@ class PizzaMoscow(
     }
 
     override fun getAdditionStatistics() {
-        println("Процент людей, показывающих чек: ${yesCount.toDouble() / (yesCount + noCount) * 100.0}")
+        val total = neapolitanPizzaCount + romanPizzaCount + sicilianPizzaCount + tyroleanPizzaCount
+        println("\nПроцент людей, Показывающих чек: ${yesPhoto.toDouble() / total * 100}%")
+        println("Процент людей, не показывающих чек: ${100 - (yesPhoto.toDouble() / total * 100)}%\n")
     }
 }

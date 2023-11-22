@@ -4,21 +4,20 @@ class PizzaPeter(
 ) : PizzaCity(neapolitanPizzaPrice, romanPizzaPrice,
     sicilianPizzaPrice, tyroleanPizzaPrice
 ), Drink{
-    override var yesCount = 0
-    override var noCount = 0
-    override var cofeCount = 0
     override var summaryCofeMoney = 0
+    override var pizzas = mutableMapOf(
+        "neapolitan" to 0,
+        "roman" to 0,
+        "sicilian" to 0,
+        "tyrolean" to 0)
 
-    override fun drinkSale() {
-        println("Вы будете пить кофе?")
+    override fun drinkSale(pizzaName: String) {
+        println("\nВы будете пить кофе?")
         println("1. Да\n2. Нет")
         if (readln() == "1"){
-            println("С вас 200 рублей")
-            cofeCount++
+            println("С вас 200 рублей\n")
             summaryCofeMoney += 200
-            yesCount++
-        } else{
-            noCount++
+            pizzas[pizzaName] = pizzas[pizzaName]!! + 1
         }
     }
     override fun neapolitanPizzaSale(){
@@ -43,6 +42,14 @@ class PizzaPeter(
     }
 
     override fun getAdditionStatistics() {
-        println("Процент людей, покупающих кофе: ${yesCount.toDouble() / (yesCount + noCount) * 100}")
+        val total = neapolitanPizzaCount + romanPizzaCount + sicilianPizzaCount + tyroleanPizzaCount
+        println("\nПроцент людей, покупающих кофе: ${pizzas.values.sum().toDouble() / total * 100}%")
+        println("Процент людей, не покупающих кофе: ${100 - (pizzas.values.sum().toDouble() / total * 100)}%\n")
+
+        println("К неаполитанской пицце купило кофе ${pizzas["neapolitan"]} человек (${pizzas["neapolitan"]!!.toDouble() / total * 100}%)")
+        println("К римской пицце купило кофе ${pizzas["roman"]} человек (${pizzas["roman"]!!.toDouble() / total * 100}%)")
+        println("К сицилийской пицце купило кофе ${pizzas["sicilian"]} человек (${pizzas["sicilian"]!!.toDouble() / total * 100}%)")
+        println("К тирольской пицце купило кофе ${pizzas["tyrolean"]} человек (${pizzas["tyrolean"]!!.toDouble() / total * 100}%)")
+        println("Чаще всего кофе покупают к ${pizzas.maxBy { it.value }}\n")
     }
 }

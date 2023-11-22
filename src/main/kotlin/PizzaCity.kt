@@ -8,17 +8,17 @@ abstract class PizzaCity(
     protected var tyroleanPizzaCount = 0
 
     private var money = 0.0
-    abstract fun neapolitanPizzaSale()
-    abstract fun romanPizzaSale()
-    abstract fun sicilianPizzaSale()
-    abstract fun tyroleanPizzaSale()
+    public abstract fun neapolitanPizzaSale()
+    public abstract fun romanPizzaSale()
+    public abstract fun sicilianPizzaSale()
+    public abstract fun tyroleanPizzaSale()
     protected abstract fun getAdditionMoney() : Int
     protected abstract fun getAdditionStatistics()
 
     fun showStatistics(){
-        println("Продано сицилийской пиццы: $sicilianPizzaCount")
-        println("Продано неаполитанской пиццы: $neapolitanPizzaCount")
+        println("\nПродано неаполитанской пиццы: $neapolitanPizzaCount")
         println("Продано римской пиццы: $romanPizzaCount")
+        println("Продано сицилийской пиццы: $sicilianPizzaCount")
         println("Продано тирольской пиццы: $tyroleanPizzaCount")
         getAdditionStatistics()
 
@@ -27,6 +27,6 @@ abstract class PizzaCity(
                 romanPizzaCount * romanPizzaPrice +
                 tyroleanPizzaCount * tyroleanPizzaPrice
 
-        println("Всего заработано денег: ${money + getAdditionMoney()}")
+        println("Всего заработано денег: ${money + getAdditionMoney()}\n")
     }
 }
